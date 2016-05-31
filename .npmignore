@@ -1,0 +1,10 @@
+.eslintrc
+.eslintignore
+.npmignore
+webpack.config.js
+*.tgz
+
+!dist/
+
+example/
+src/
