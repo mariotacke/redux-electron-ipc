@@ -1,0 +1,16 @@
+{
+  "name": "redux-electron-ipc-middleware-example",
+  "main": "main.js",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "./node_modules/.bin/webpack ./app/app.js && electron ."
+  },
+  "devDependencies": {
+    "babel-core": "^6.9.1",
+    "babel-loader": "^6.2.4",
+    "babel-preset-es2015": "^6.9.0",
+    "html-webpack-plugin": "^2.19.0",
+    "redux": "^3.5.2",
+    "webpack": "^1.13.1"
+  }
+}

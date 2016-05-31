@@ -1,0 +1,6 @@
+npm-debug.log
+*.tgz
+
+dist/
+lib/
+node_modules/
