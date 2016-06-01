@@ -29,15 +29,7 @@ const config = {
             {
                 test: /\.jsx?$/,
                 exclude: /node_modules/,
-                loader: 'babel',
-                query: {
-                    presets: [
-                        'es2015'
-                    ],
-                    plugins: [
-                        'babel-plugin-add-module-exports'
-                    ]
-                }
+                loader: 'babel'
             }
         ]
     },
