@@ -1,4 +1,6 @@
 # Redux Electron IPC Middleware
+[![Build Status](https://travis-ci.org/mariotacke/redux-electron-ipc.svg?branch=master)](https://travis-ci.org/mariotacke/redux-electron-ipc) [![npm version](https://badge.fury.io/js/redux-electron-ipc.svg)](https://badge.fury.io/js/redux-electron-ipc)
+
 A [Redux](https://github.com/reactjs/redux) middleware to reduce code around ipc
 calls in an [Electron](http://electron.atom.io/) application. You can send and
 receive [IPC](https://github.com/electron/electron/blob/master/docs/api/ipc-main.md)
