@@ -3,9 +3,6 @@
   "version": "1.0.0",
   "description": "Redux Electron IPC Middleware",
   "main": "index.js",
-  "directories": {
-    "example": "example"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "lint": "./node_modules/.bin/eslint .",
@@ -19,6 +16,13 @@
     "middleware"
   ],
   "author": "Mario Tacke <tacke.mario@gmail.com>",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mariotacke/redux-electron-ipc.git"
+  },
+  "bugs": {
+    "url": "https://github.com/mariotacke/redux-electron-ipc/issues"
+  },
   "license": "MIT",
   "devDependencies": {
     "babel-core": "^6.9.1",

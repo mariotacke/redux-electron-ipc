@@ -1,12 +1,19 @@
 # Redux Electron IPC Middleware
 A [Redux](https://github.com/reactjs/redux) middleware to reduce code around ipc
 calls in an [Electron](http://electron.atom.io/) application. You can send and
-receive
-[IPC](https://github.com/electron/electron/blob/master/docs/api/ipc-main.md)
+receive [IPC](https://github.com/electron/electron/blob/master/docs/api/ipc-main.md)
 events with a simple api.
 
+## Install
+
+### [npm](https://www.npmjs.com/package/redux-electron-ipc)
+```sh
+npm install --save redux-electron-ipc
+```
+
 ## Usage
-Check out the full demo application.
+Check out the full [demo](https://github.com/mariotacke/redux-electron-ipc/tree/master/example)
+application.
 
 ### Window
 ```js
