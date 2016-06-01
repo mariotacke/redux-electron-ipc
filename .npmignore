@@ -1,6 +1,8 @@
+.babelrc
 .eslintrc
 .eslintignore
 .npmignore
+.travis.yml
 webpack.config.js
 *.tgz
 
@@ -8,3 +10,4 @@ webpack.config.js
 
 example/
 src/
+test/

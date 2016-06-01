@@ -49,3 +49,70 @@ ipcMain.on('ping', (event, ...args) => {
     event.sender.send('pong', ...args);
 });
 ```
+
+## API
+
+`redux-electron-ipc` has a single constructor function for creating ipc
+middleware.
+
+```js
+createIpc(events?: Object, prefix?: string) => IpcMiddleware
+```
+
+### Events
+Each key on the `events` object (default: `{}`) registers a single ipc channel
+response. The key designates the `ipc` channel; the value is a redux action
+creator to be dispatched.
+
+```js
+{
+    'ipc channel name': (event, ...args) => {
+        return {
+            type: 'YOUR_ACTION_TYPE',
+            ... optional mapping of arguments ...
+        }
+    }
+}
+```
+
+### Prefix
+The optional prefix (default: `IPC_`) determines which actions to forward to ipc
+when dispatched through the redux store.
+
+### Examples
+
+#### Sending an IPC event
+The following `dispatch` will be intercepted by the `redux electron ipc`
+middleware and triggers an ipc event because the action type is in the form of
+`IPC_`... and a `channel` is specified.
+
+```js
+store.dispatch({
+    type: IPC_ACTION_NAME, // IPC_ prefix + action name
+    channel: 'ipc event channel',
+    payload: {
+        key: value
+    }
+});
+```
+
+#### Receiving an IPC event
+To receive events, register a channel response when configuring the middleware.
+
+```js
+const ipc = createIpc({
+    'channel to listen to': () => {
+        return {
+            action: 'IPC_RESPONSE_ACTION',
+            ... optional mapping of arguments ...
+        }
+    }
+    ...
+});
+
+const store = createStore(exampleReducer, applyMiddleware(ipc));
+```
+
+## Questions
+For any questions, please open an [issue](https://github.com/mariotacke/redux-electron-ipc/issues).
+Pull requests (with tests) are appreciated.
