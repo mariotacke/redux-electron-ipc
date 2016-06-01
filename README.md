@@ -84,15 +84,18 @@ when dispatched through the redux store.
 #### Sending an IPC event
 The following `dispatch` will be intercepted by the `redux electron ipc`
 middleware and triggers an ipc event because the action type is in the form of
-`IPC_`... and a `channel` is specified.
+`IPC_`... and a `channel` is specified. Arguments to the ipc are passed via the
+`args` array of the action.
 
 ```js
 store.dispatch({
     type: IPC_ACTION_NAME, // IPC_ prefix + action name
     channel: 'ipc event channel',
-    payload: {
-        key: value
-    }
+    args: [
+        payload: {
+            key: value
+        }
+    ]
 });
 ```
 
