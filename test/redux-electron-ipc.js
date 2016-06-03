@@ -14,51 +14,59 @@ class ipcMock extends EventEmitter {
     }
 }
 
-describe('createIpc', () => {
+describe('redux electron ipc', () => {
     let createIpc;
+    let send;
     let ipcRenderer;
 
     beforeEach(() => {
         ipcRenderer = new ipcMock();
 
         // mock electron ipc event emitter when loading our library
-        createIpc = proxyquire.noCallThru().load('../dist/electron-redux-ipc.js', {
+        const lib = proxyquire.noCallThru().load('../dist/electron-redux-ipc', {
             electron: { ipcRenderer }
+        });
+
+        createIpc = lib.default;
+        send = lib.send;
+    });
+
+    describe('createIpc', () => {
+        it('should fire registered ipc event handlers', () => {
+            const testReducer = (state = { test: 0 }, action) => {
+                switch (action.type) {
+                    case 'IPC_TEST':
+                        return { test: state.test + 1 };
+                    default:
+                        return state;
+                }
+            };
+
+            const ipc = createIpc({
+                'test-channel': () => { return { type: 'IPC_TEST' }; }
+            });
+
+            const store = createStore(testReducer, applyMiddleware(ipc));
+
+            expect(store.getState().test).to.equal(0);
+
+            // will send ipc message and dispatch registered action on response
+            store.dispatch(send('test-channel'));
+            expect(store.getState().test).to.equal(1);
+
+            // will send ipc message but receive no response
+            store.dispatch(send('unregistered-channel'));
+            expect(store.getState().test).to.equal(1);
         });
     });
 
-    it('should fire registered ipc event handlers', () => {
-        const testReducer = (state = { test: 0 }, action) => {
-            switch (action.type) {
-                case 'IPC_TEST':
-                    return { test: state.test + 1 };
-                default:
-                    return state;
-            }
-        };
+    describe('send', () => {
+        it('should return a dispatch-able ipc action', () => {
+            const action = send('test-channel', { key: 'value' }, 'test');
 
-        const ipc = createIpc({
-            'test-channel': () => { return { type: 'IPC_TEST' }; }
+            expect(action.type).to.equal('@@IPC');
+            expect(action.channel).to.equal('test-channel');
+            expect(action.args.length).to.equal(2);
         });
-
-        const store = createStore(testReducer, applyMiddleware(ipc));
-
-        expect(store.getState().test).to.equal(0);
-
-        // directly invoking a specific emit on the ipc
-        ipcRenderer.emit('test-channel');
-        expect(store.getState().test).to.equal(1);
-
-        // proxy emitting through redux-electron-ipc
-        store.dispatch({ type: 'IPC_ECHO', channel: 'test-channel' });
-        expect(store.getState().test).to.equal(2);
-
-        // test unregistered channel
-        ipcRenderer.emit('unknown-channel');
-        expect(store.getState().test).to.equal(2);
-
-        // proxy test unregistered channel
-        store.dispatch({ type: 'IPC_ECHO', channel: 'unknown-channel' });
-        expect(store.getState().test).to.equal(2);
     });
 });

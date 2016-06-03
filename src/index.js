@@ -1,6 +1,6 @@
 import { ipcRenderer as ipc } from 'electron';
 
-function createIpc (events = {}, prefix = 'IPC_') {
+export default function createIpc (events = {}) {
     return ({ dispatch }) => {
         Object.keys(events).forEach((key) => {
             ipc.on(key, function () {
@@ -10,7 +10,7 @@ function createIpc (events = {}, prefix = 'IPC_') {
 
         return function (next) {
             return function (action) {
-                if (action.channel && action.type.startsWith(prefix)) {
+                if (action.type.startsWith('@@IPC')) {
                     ipc.send(action.channel, ...(action.args || []));
                 }
 
@@ -20,4 +20,10 @@ function createIpc (events = {}, prefix = 'IPC_') {
     };
 }
 
-export default createIpc;
+export function send (channel) {
+    return {
+        type: '@@IPC',
+        channel,
+        args: Array.prototype.slice.call(arguments, 1)
+    };
+}

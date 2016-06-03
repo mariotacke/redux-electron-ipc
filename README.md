@@ -1,5 +1,5 @@
 # Redux Electron IPC Middleware
-[![Build Status](https://travis-ci.org/mariotacke/redux-electron-ipc.svg?branch=master)](https://travis-ci.org/mariotacke/redux-electron-ipc) [![npm version](https://badge.fury.io/js/redux-electron-ipc.svg)](https://badge.fury.io/js/redux-electron-ipc)
+[![Build Status](https://travis-ci.org/mariotacke/redux-electron-ipc.svg?branch=master)](https://travis-ci.org/mariotacke/redux-electron-ipc) [![npm version](https://badge.fury.io/js/redux-electron-ipc.svg)](https://badge.fury.io/js/redux-electron-ipc) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/mariotacke/redux-electron-ipc/master/LICENSE)
 
 A [Redux](https://github.com/reactjs/redux) middleware to reduce code around ipc
 calls in an [Electron](http://electron.atom.io/) application. You can send and
@@ -20,8 +20,8 @@ application.
 ### Window
 ```js
 import { applyMiddleware, createStore } from 'redux';
-import createIpc from 'redux-electron-ipc';
-import { pingActionCreator, pongActionCreator } from './actions';
+import createIpc, { send } from 'redux-electron-ipc';
+import { pongActionCreator } from './actions';
 import { exampleReducer } from './reducer';
 
 // register an action creator to an ipc channel (key/channel, value/action creator)
@@ -32,12 +32,13 @@ const ipc = createIpc({
 
 const store = createStore(exampleReducer, applyMiddleware(ipc));
 
-// send a message with arguments
-store.dispatch(pingActionCreator('redux', 'electron', 'ipc'));
+// send a message with arguments through the `send` utility function
+store.dispatch(send('ping', 'redux', 'electron', 'ipc'));
 ```
 
 ### Main
 ```js
+// your regular ipc setup
 const electron = require('electron');
 const { ipcMain } = electron;
 
@@ -52,11 +53,12 @@ ipcMain.on('ping', (event, ...args) => {
 
 ## API
 
-`redux-electron-ipc` has a single constructor function for creating ipc
-middleware.
+`redux-electron-ipc` has a default constructor function for creating ipc
+middleware, and a named `send` utility function.
 
 ```js
-createIpc(events?: Object, prefix?: string) => IpcMiddleware
+createIpc(events?: Object) => IpcMiddleware
+send(channel: string, ...arg1?: Object, arg2?: Object, ..., argN?:Object) => Action
 ```
 
 ### Events
@@ -75,28 +77,19 @@ creator to be dispatched.
 }
 ```
 
-### Prefix
-The optional prefix (default: `IPC_`) determines which actions to forward to ipc
-when dispatched through the redux store.
-
 ### Examples
 
 #### Sending an IPC event
-The following `dispatch` will be intercepted by the `redux electron ipc`
-middleware and triggers an ipc event because the action type is in the form of
-`IPC_`... and a `channel` is specified. Arguments to the ipc are passed via the
-`args` array of the action.
+Use the utility function `send` to issue an ipc message to the main thread. The
+method signature is the same as ipcRenderer's send.
+
+Behind the scenes, the ipc middleware will trigger the ipc on the given channel
+with any number of arguments.
 
 ```js
-store.dispatch({
-    type: IPC_ACTION_NAME, // IPC_ prefix + action name
-    channel: 'ipc event channel',
-    args: [
-        payload: {
-            key: value
-        }
-    ]
-});
+import { send } from 'redux-electron-ipc';
+
+store.dispatch(send('ipc event channel', ...args));
 ```
 
 #### Receiving an IPC event
