@@ -109,6 +109,18 @@ const ipc = createIpc({
 const store = createStore(exampleReducer, applyMiddleware(ipc));
 ```
 
+## What about `redux-thunk`?
+`redux-electron-ipc` supports thunks out of the box as long as you install `redux-thunk` and apply the thunk middleware before the ipc middleware.
+
+### Example
+```js
+const ipc = createIpc({
+    'ipc channel name': () => dispatch =>
+        dispatch({ type: 'DELAYED_ACTION_TYPE' })
+});
+const store = createStore(exampleReducer, applyMiddleware(thunk, ipc));
+```
+
 ## Questions
 For any questions, please open an [issue](https://github.com/mariotacke/redux-electron-ipc/issues).
 Pull requests (with tests) are appreciated.

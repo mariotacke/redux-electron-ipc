@@ -2,6 +2,7 @@ import { expect } from 'chai';
 import { applyMiddleware, createStore } from 'redux';
 import proxyquire from 'proxyquire';
 import { EventEmitter } from 'events';
+import thunk from 'redux-thunk';
 
 // basic event emitter mock to echo ipc requests
 class ipcMock extends EventEmitter {
@@ -57,6 +58,29 @@ describe('redux electron ipc', () => {
             // will send ipc message but receive no response
             store.dispatch(send('unregistered-channel'));
             expect(store.getState().test).to.equal(1);
+        });
+
+        it('should work with thunks', () => {
+            const testReducer = (state = 0, action) => {
+                switch (action.type) {
+                    case 'DELAYED_IPC_TEST':
+                        return state + 1;
+                    default:
+                        return state;
+                }
+            };
+
+            const ipc = createIpc({
+                'test-channel': () => dispatch =>
+                    dispatch({ type: 'DELAYED_IPC_TEST' })
+            });
+
+            const store = createStore(testReducer, applyMiddleware(thunk, ipc));
+
+            expect(store.getState()).to.equal(0);
+
+            store.dispatch(send('test-channel'));
+            expect(store.getState()).to.equal(1);
         });
     });
 
