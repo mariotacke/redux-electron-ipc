@@ -84,10 +84,17 @@ describe('redux electron ipc', () => {
         });
 
         it('should validate events object', () => {
+            expect(() => createIpc({})).to.not.throw;
             expect(() => createIpc(0)).to.throw(TypeError,
                 /createIpc expects an events object as its first parameter, you passed type "number"/);
             expect(() => createIpc('invalid')).to.throw(TypeError,
                 /createIpc expects an events object as its first parameter, you passed type "string"/);
+
+            expect(() => createIpc({ channel: () => ({ type: 'TEST' }) })).to.not.throw;
+            expect(() => createIpc({ channel: false })).to.throw(TypeError,
+                /Each key in createIpc's events object must be a dispatch-able function, key "channel" is of type "boolean"/);
+            expect(() => createIpc({ channel: 'invalid' })).to.throw(TypeError,
+                /Each key in createIpc's events object must be a dispatch-able function, key "channel" is of type "string"/);
         });
     });
 
