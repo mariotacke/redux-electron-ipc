@@ -1,6 +1,10 @@
 import { ipcRenderer as ipc } from 'electron';
 
 export default function createIpc (events = {}) {
+    if (typeof events !== 'object') {
+        throw new TypeError(`createIpc expects an events object as its first parameter, you passed type "${typeof events}"`);
+    }
+
     return ({ dispatch }) => {
         Object.keys(events).forEach((key) => {
             ipc.on(key, function () {

@@ -82,6 +82,13 @@ describe('redux electron ipc', () => {
             store.dispatch(send('test-channel'));
             expect(store.getState()).to.equal(1);
         });
+
+        it('should validate events object', () => {
+            expect(() => createIpc(0)).to.throw(TypeError,
+                /createIpc expects an events object as its first parameter, you passed type "number"/);
+            expect(() => createIpc('invalid')).to.throw(TypeError,
+                /createIpc expects an events object as its first parameter, you passed type "string"/);
+        });
     });
 
     describe('send', () => {
