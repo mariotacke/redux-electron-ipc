@@ -3,7 +3,8 @@
   "main": "main.js",
   "version": "1.0.0",
   "scripts": {
-    "start": "./node_modules/.bin/webpack ./app/app.js && ./node_modules/.bin/electron ."
+    "start": "./node_modules/.bin/webpack ./app/app.js && ./node_modules/.bin/electron .",
+    "postinstall": "cd .. && npm install && ./node_modules/.bin/webpack"
   },
   "devDependencies": {
     "babel-core": "^6.9.1",
