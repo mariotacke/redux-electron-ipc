@@ -26,8 +26,8 @@ import { exampleReducer } from './reducer';
 
 // register an action creator to an ipc channel (key/channel, value/action creator)
 const ipc = createIpc({
-    'pong': pongActionCreator, // receive a message
-    ...
+  'pong': pongActionCreator, // receive a message
+  ...
 });
 
 const store = createStore(exampleReducer, applyMiddleware(ipc));
@@ -46,8 +46,8 @@ const { ipcMain } = electron;
 
 // pong event with arguments back to caller
 ipcMain.on('ping', (event, ...args) => {
-    console.log('Ping', ...args);
-    event.sender.send('pong', ...args);
+  console.log('Ping', ...args);
+  event.sender.send('pong', ...args);
 });
 ```
 
@@ -68,12 +68,12 @@ creator to be dispatched.
 
 ```js
 {
-    'ipc channel name': (event, ...args) => {
-        return {
-            type: 'YOUR_ACTION_TYPE',
-            ... optional mapping of arguments ...
-        }
+  'ipc channel name': (event, ...args) => {
+    return {
+      type: 'YOUR_ACTION_TYPE',
+      ... optional mapping of arguments ...
     }
+  }
 }
 ```
 
@@ -97,13 +97,13 @@ To receive events, register a channel response when configuring the middleware.
 
 ```js
 const ipc = createIpc({
-    'channel to listen to': () => {
-        return {
-            action: 'IPC_RESPONSE_ACTION',
-            ... optional mapping of arguments ...
-        }
+  'channel to listen to': () => {
+    return {
+      action: 'IPC_RESPONSE_ACTION',
+      ... optional mapping of arguments ...
     }
-    ...
+  }
+  ...
 });
 
 const store = createStore(exampleReducer, applyMiddleware(ipc));
@@ -115,8 +115,8 @@ const store = createStore(exampleReducer, applyMiddleware(ipc));
 ### Example
 ```js
 const ipc = createIpc({
-    'ipc channel name': () => dispatch =>
-        dispatch({ type: 'DELAYED_ACTION_TYPE' })
+  'ipc channel name': () => dispatch =>
+    dispatch({ type: 'DELAYED_ACTION_TYPE' })
 });
 const store = createStore(exampleReducer, applyMiddleware(thunk, ipc));
 ```

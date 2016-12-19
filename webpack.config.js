@@ -9,32 +9,32 @@ const plugins        = [];
 let filename;
 
 if (env === 'production') {
-    plugins.push(new UglifyJsPlugin({ minimize: true }));
-    filename = `${library}.min.js`;
+  plugins.push(new UglifyJsPlugin({ minimize: true }));
+  filename = `${library}.min.js`;
 } else {
-    filename = `${library}.js`;
+  filename = `${library}.js`;
 }
 
 const config = {
-    entry: `${__dirname}/src/index.js`,
-    output: {
-        path: `${__dirname}/dist`,
-        filename,
-        library,
-        libraryTarget: 'umd',
-        umdNamedDefine: true
-    },
-    module: {
-        loaders: [
-            {
-                test: /\.jsx?$/,
-                exclude: /node_modules/,
-                loader: 'babel'
-            }
-        ]
-    },
-    target: 'electron',
-    plugins
+  entry: `${__dirname}/src/index.js`,
+  output: {
+    path: `${__dirname}/dist`,
+    filename,
+    library,
+    libraryTarget: 'umd',
+    umdNamedDefine: true
+  },
+  module: {
+    loaders: [
+      {
+        test: /\.jsx?$/,
+        exclude: /node_modules/,
+        loader: 'babel'
+      }
+    ]
+  },
+  target: 'electron',
+  plugins
 };
 
 module.exports = config;

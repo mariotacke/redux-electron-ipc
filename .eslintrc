@@ -1,38 +1,39 @@
 {
-    "parser": "babel-eslint",
-    "env": {
-        "browser": true,
-        "node": true,
-        "es6": true
-    },
-    "extends": [
-        "eslint:recommended"
-    ],
-    "parserOptions": {
-        "sourceType": "module",
-        "ecmaFeatures": {
-            "modules": true
-        }
-    },
-    "rules": {
-        "object-curly-spacing": [2, "always"],
-        "object-shorthand": [2, "always"],
-        "one-var": [2, "never"],
-        "no-array-constructor": 2,
-        "no-console": 1,
-        "no-const-assign": 2,
-        "no-new-object": 2,
-        "no-unused-vars": 1,
-        "no-var": 2,
-        "prefer-arrow-callback": 2,
-        "prefer-const": 2,
-        "prefer-spread": 1,
-        "prefer-template": 2,
-        "quote-props": [2, "as-needed"],
-        "quotes": [2, "single"],
-        "require-yield": 1,
-        "semi": 2,
-        "keyword-spacing": 2,
-        "space-before-function-paren": 2
+  "parser": "babel-eslint",
+  "env": {
+    "browser": true,
+    "node": true,
+    "es6": true
+  },
+  "extends": [
+    "eslint:recommended"
+  ],
+  "parserOptions": {
+    "sourceType": "module",
+    "ecmaFeatures": {
+      "modules": true
     }
+  },
+  "rules": {
+    "indent": ["error", 2, { "SwitchCase": 1 }],
+    "keyword-spacing": 2,
+    "object-curly-spacing": [2, "always"],
+    "object-shorthand": [2, "always"],
+    "one-var": [2, "never"],
+    "no-array-constructor": 2,
+    "no-console": 1,
+    "no-const-assign": 2,
+    "no-new-object": 2,
+    "no-unused-vars": 1,
+    "no-var": 2,
+    "prefer-arrow-callback": 2,
+    "prefer-const": 2,
+    "prefer-spread": 1,
+    "prefer-template": 2,
+    "quote-props": [2, "as-needed"],
+    "quotes": [2, "single"],
+    "require-yield": 1,
+    "semi": 2,
+    "space-before-function-paren": 2
+  }
 }
