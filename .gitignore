@@ -1,6 +1,7 @@
 npm-debug.log
 *.tgz
 
+coverage/
 dist/
 lib/
 node_modules/

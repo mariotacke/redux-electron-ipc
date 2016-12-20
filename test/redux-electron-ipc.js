@@ -24,7 +24,7 @@ describe('redux electron ipc', () => {
     ipcRenderer = new ipcMock();
 
     // mock electron ipc event emitter when loading our library
-    const lib = proxyquire.noCallThru().load('../dist/electron-redux-ipc', {
+    const lib = proxyquire.noCallThru().load('../src', {
       electron: { ipcRenderer }
     });
 
@@ -84,7 +84,9 @@ describe('redux electron ipc', () => {
     });
 
     it('should validate events object', () => {
+      expect(() => createIpc()).to.not.throw;
       expect(() => createIpc({})).to.not.throw;
+
       expect(() => createIpc(0)).to.throw(TypeError,
         /createIpc expects an events object as its first parameter, you passed type "number"/);
       expect(() => createIpc('invalid')).to.throw(TypeError,

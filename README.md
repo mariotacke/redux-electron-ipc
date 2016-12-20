@@ -1,5 +1,5 @@
 # Redux Electron IPC Middleware
-[![Build Status](https://travis-ci.org/mariotacke/redux-electron-ipc.svg?branch=master)](https://travis-ci.org/mariotacke/redux-electron-ipc) [![npm version](https://badge.fury.io/js/redux-electron-ipc.svg)](https://badge.fury.io/js/redux-electron-ipc) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/mariotacke/redux-electron-ipc/master/LICENSE)
+[![Build Status](https://travis-ci.org/mariotacke/redux-electron-ipc.svg?branch=master)](https://travis-ci.org/mariotacke/redux-electron-ipc) [![npm version](https://badge.fury.io/js/redux-electron-ipc.svg)](https://badge.fury.io/js/redux-electron-ipc) [![Coverage Status](https://coveralls.io/repos/github/mariotacke/redux-electron-ipc/badge.svg?branch=master)](https://coveralls.io/github/mariotacke/redux-electron-ipc?branch=master) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/mariotacke/redux-electron-ipc/master/LICENSE)
 
 A [Redux](https://github.com/reactjs/redux) middleware to reduce code around ipc
 calls in an [Electron](http://electron.atom.io/) application. You can send and
