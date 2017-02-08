@@ -6,7 +6,6 @@ node_js:
 script:
 - npm run lint
 - npm run build
-- npm run test-coveralls
 cache:
   directories:
   - example/node_modules
@@ -18,3 +17,5 @@ deploy:
   on:
     tags: true
     repo: mariotacke/redux-electron-ipc
+after_success:
+  - npm run test-coveralls
