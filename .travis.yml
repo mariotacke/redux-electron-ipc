@@ -17,5 +17,5 @@ deploy:
   on:
     tags: true
     repo: mariotacke/redux-electron-ipc
-after_success:
+after_deploy:
   - npm run test-coveralls
