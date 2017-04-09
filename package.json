@@ -11,6 +11,9 @@
     "build": "webpack && cross-env WEBPACK_ENV=production webpack",
     "dev": "webpack --watch"
   },
+  "files": [
+    "dist"
+  ],
   "keywords": [
     "redux",
     "electron",
