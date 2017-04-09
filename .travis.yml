@@ -16,6 +16,7 @@ deploy:
     secure: p1/G4z94aR9rsyh/tq9LJSYaozmeL8Z/XRq9Vec1y7JfZfvOcn3e5wDrStdgKIGFFke0iGoBZhL9kIsBRvYNrCif/aOKA20nV12zHF7MJW0fEwIjUXodpRHIoGLnYmB4uI+drOGkvSv7kskUQvt19taHp39ULAMvsy6Ll81OB0hjO8DJAlJ7ZQyTAsp9ELS7M2gKSk+PW5KTnPc5BK32l2GjgsG21g3yuvAbNv6mFssFPRg4Z5if/SU2+u+kooZGC2Rn3YXDTz6lJMDTPifotFFLOAxNIjA/2E5SXsh4tBX2leQaAfmADfz+MxHt9HJhZRCqTcyCfQEB9C2JX3z95ROleGPUCUOJVHZJZhgNtCecoSnrZRGfw9TeW9VC9DjquPK9JXogCNccZQ56+Uu7crwpO2RsP66CNyQAbaywdo4qXMvDj/I8G95RLTw4z0kCG7dc5/kRoM2l/MF7DrI4btTZGnF7sVVSvbXMQtwZm8fnmj7jO7zFSWuYrsATv7eFGw72CWNzcySI7qKd6czp0aat5Zj/spK2l1/gjpmXnugpVHZWZ9D7gMWBRptqPnJLaF8ZFDpMZCTFw+p4mHiooysc/okFj4cdm/1UEk1oLgnloJXTGVF+/U/JzzJLGgAeAOuSp0AI4ynJlU7rhUsed2LcKbrKkyCrufjj5W45d7k=
   on:
     tags: true
+    node: 6
     repo: mariotacke/redux-electron-ipc
 after_deploy:
   - npm run test-coveralls
