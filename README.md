@@ -99,7 +99,7 @@ To receive events, register a channel response when configuring the middleware.
 const ipc = createIpc({
   'channel to listen to': () => {
     return {
-      action: 'IPC_RESPONSE_ACTION',
+      type: 'IPC_RESPONSE_ACTION',
       ... optional mapping of arguments ...
     }
   }
