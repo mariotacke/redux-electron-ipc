@@ -1,4 +1,5 @@
 # Redux Electron IPC Middleware
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/3c5f327c74fb4125b60133e5ad372c0a)](https://www.codacy.com/app/mariotacke/redux-electron-ipc?utm_source=github.com&utm_medium=referral&utm_content=mariotacke/redux-electron-ipc&utm_campaign=badger)
 [![Build Status](https://travis-ci.org/mariotacke/redux-electron-ipc.svg?branch=master)](https://travis-ci.org/mariotacke/redux-electron-ipc) [![npm version](https://badge.fury.io/js/redux-electron-ipc.svg)](https://badge.fury.io/js/redux-electron-ipc) [![Coverage Status](https://coveralls.io/repos/github/mariotacke/redux-electron-ipc/badge.svg?branch=master)](https://coveralls.io/github/mariotacke/redux-electron-ipc?branch=master) [![GitHub license](https://img.shields.io/badge/license-MIT-blue.svg)](https://raw.githubusercontent.com/mariotacke/redux-electron-ipc/master/LICENSE)
 
 A [Redux](https://github.com/reactjs/redux) middleware to reduce code around ipc
