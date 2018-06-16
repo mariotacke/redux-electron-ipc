@@ -1,6 +1,6 @@
 language: node_js
 node_js:
-- '9'
+- '10'
 - '8'
 - '6'
 - '4'
@@ -21,4 +21,4 @@ deploy:
     node: 8
     repo: mariotacke/redux-electron-ipc
 after_deploy:
-  - npm run test-coveralls
+  - npm run coverage
